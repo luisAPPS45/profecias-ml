@@ -26,9 +26,9 @@ export default function Home() {
         setEmail("");
         setPassword("");
       } else {
-        setMessage(`❌ Error: ${data.error || "No se pudo registrar"}`);
+        setMessage(`❌ ${data.error || "No se pudo registrar"}`);
       }
-    } catch (err) {
+    } catch {
       setMessage("❌ Error en el servidor");
     }
   };
@@ -66,9 +66,7 @@ export default function Home() {
             Registrarse
           </button>
         </form>
-        {message && (
-          <p className="mt-4 text-center text-sm text-gray-700">{message}</p>
-        )}
+        {message && <p className="mt-4 text-center text-sm text-gray-700">{message}</p>}
       </div>
     </div>
   );
