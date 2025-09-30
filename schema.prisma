@@ -3,36 +3,36 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite" // luego cambiaremos a "postgresql" en producción
+  provider = "sqlite" // en producción cambiaremos a "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id         String    @id @default(cuid())
-  email      String    @unique
+  id         String     @id @default(cuid())
+  email      String     @unique
   name       String?
   password   String
   posts      Post[]
-  followers  Follows[] @relation("followers")
-  following  Follows[] @relation("following")
-  likes      Like[]    // relación inversa requerida por Like.user
-  createdAt  DateTime  @default(now())
+  followers  Follows[]  @relation("followers")
+  following  Follows[]  @relation("following")
+  likes      Like[]     // relación inversa requerida por Like.user
+  createdAt  DateTime   @default(now())
 }
 
 model Post {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   content   String
-  author    User     @relation(fields: [authorId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id])
   authorId  String
   likes     Like[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
 
 model Like {
-  id      String @id @default(cuid())
-  post    Post   @relation(fields: [postId], references: [id])
+  id      String  @id @default(cuid())
+  post    Post    @relation(fields: [postId], references: [id])
   postId  String
-  user    User   @relation(fields: [userId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
   userId  String
 
   @@unique([postId, userId]) // un like por usuario y post
