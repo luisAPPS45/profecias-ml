@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite" // en producción cambiarás a "postgresql"
+  provider = "sqlite" // luego cambiaremos a "postgresql" en producción
   url      = env("DATABASE_URL")
 }
 
@@ -15,7 +15,7 @@ model User {
   posts      Post[]
   followers  Follows[] @relation("followers")
   following  Follows[] @relation("following")
-  likes      Like[]    // ← relación inversa requerida por Like.user
+  likes      Like[]    // relación inversa requerida por Like.user
   createdAt  DateTime  @default(now())
 }
 
