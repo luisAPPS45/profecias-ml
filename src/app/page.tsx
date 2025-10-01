@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function Home() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,7 +39,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">Registro en Profecías M&L</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">
+          Registro en Profecías M&L — {new Date().toISOString()}
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="text"
@@ -71,4 +76,3 @@ export default function Home() {
     </div>
   );
 }
-
